@@ -6,7 +6,7 @@ int main(){
     char NombresLibros[MAXLIBROS][MAXLETRAS], buscar[MAXLETRAS];
     int LibrosIngresados=0, respuesta=0, CantidadLibros[MAXLIBROS];
     float PrecioLibros[MAXLIBROS];
-    while (respuesta <= 4)
+    while (respuesta <= 5)
     {   
         printf("/// Inventario Biblioteca del saber \\\\\\ \n");
         printf("Opciones de Inventario: \n");
@@ -14,8 +14,9 @@ int main(){
         printf("2.- Buscar un libro. \n");
         printf("3.- Editar un libro. \n");
         printf("4.- Eliminar un libro. \n");
-        printf("5.- Salir del programa. \n");
-        respuesta = leerEnteroEntre("Ingrese la opcion a elegir: ",1,5);
+        printf("5.- Agregar stock. \n");
+        printf("6.- Salir del programa. \n");
+        respuesta = leerEnteroEntre("Ingrese la opcion a elegir: ",1,6);
         limpiarBufferEntrada(); 
         switch (respuesta)
         {
@@ -30,6 +31,9 @@ int main(){
             break;
         case 4:
             EliminarLibro(NombresLibros, buscar, CantidadLibros, PrecioLibros, LibrosIngresados);
+            break;
+        case 5:
+            aumentarStock(NombresLibros, buscar, CantidadLibros, LibrosIngresados);
             break;
         default:
         printf("Saliendo...");

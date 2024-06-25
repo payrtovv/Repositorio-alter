@@ -5,5 +5,6 @@ void IngresarNuevolibro(char [MAXLIBROS][MAXLETRAS], int [MAXLIBROS], float [MAX
 void buscarLibro(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], float[MAXLIBROS], int);
 void EliminarLibro(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], float[MAXLIBROS], int);
 void EditarLibro(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], float[MAXLIBROS], int);
+void aumentarStock(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], int);
 
 void limpiarBufferEntrada();

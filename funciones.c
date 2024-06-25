@@ -27,7 +27,7 @@ void IngresarNuevolibro(char NombresLibros[MAXLIBROS][MAXLETRAS], int CantidadLi
     PrecioLibros[*LibrosIngresados] = leerFlotantePositivo("Ingrese el precio del libro: ");
     printf("Producto agregado con exito.\n");
     printf("<-------------------------->\n");
-    *LibrosIngresados =+1;
+    (*LibrosIngresados)++;
 }
 
 void limpiarBufferEntrada() {
@@ -91,6 +91,30 @@ void EditarLibro(char NombresLibros[MAXLIBROS][MAXLETRAS], char buscar[MAXLETRAS
             PrecioLibros[i] = leerFlotantePositivo("Ingrese el nuevo precio de el libro: ");
             printf("<-------------------------->\n");
             return;
+        }
+    }
+    printf("Libro no encontrado.\n");
+    printf("<---------------------------->\n");
+}
+
+void aumentarStock(char NombresLibros[MAXLIBROS][MAXLETRAS], char buscar[MAXLETRAS], int CantidadLibros[MAXLIBROS], int LibrosIngresados){
+    int valor;
+    printf("Ingrese el nombre libro al que se quiere aumentar el stock: ");
+    fgets(buscar,MAXLETRAS, stdin);
+    for (int i = 0; i < LibrosIngresados; i++)
+    {
+        if ((strcmp(buscar,NombresLibros[i]))==0)
+        {
+            printf("Encontrado\n");
+            printf("Nombre:   %s", NombresLibros[i]);
+            printf("Cantidad: %i\n", CantidadLibros[i]);
+            valor = leerEnteroPositivo("\nIngrese cuanto se va a aumentar: ");
+            CantidadLibros[i] = CantidadLibros[i] + valor;
+            printf("Agregado correctamente\n");
+            printf("<-------------------------->\n");
+            return;
+            
+            
         }
     }
     printf("Libro no encontrado.\n");
