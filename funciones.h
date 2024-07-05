@@ -8,3 +8,11 @@ void EditarLibro(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], fl
 void aumentarStock(char[MAXLIBROS][MAXLETRAS], char[MAXLETRAS], int[MAXLIBROS], int);
 
 void limpiarBufferEntrada();
+
+void facturar(int*, int [], int[],int*, char [][], int[], int);
+
+void fac(int [], char [][], int, int );
+
+void buscarFarctura(int );
+
+void IngresarFecha(int [][], int);

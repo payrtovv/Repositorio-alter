@@ -3,9 +3,10 @@
 #include "lecturas.h"
 
 int main(){
-    char NombresLibros[MAXLIBROS][MAXLETRAS], buscar[MAXLETRAS];
-    int LibrosIngresados=0, respuesta=0, CantidadLibros[MAXLIBROS];
-    float PrecioLibros[MAXLIBROS];
+    char NombresLibros[MAXLIBROS][MAXLETRAS], buscar[MAXLETRAS], NombresClientes[MAXLIBROS][MAXLETRAS];
+    int LibrosIngresados=0, respuesta=0, CantidadLibros[MAXLIBROS], fechas[MAXLIBROS], CantidadProductos[MAXLIBROS], Cedulas[MAXLIBROS], ClientesIngresados=0, buscarcedula[9];
+    float PrecioLibros[MAXLIBROS], ValoresPagados[MAXLIBROS];
+    
     while (respuesta <= 5)
     {   
         printf("/// Inventario Biblioteca del saber \\\\\\ \n");

@@ -4,6 +4,18 @@
 #include "lecturas.h"
 #include "funciones.h"
 
+int CantidadLibros[MAXLETRAS];
+char NombresLibros[MAXLIBROS][MAXLETRAS];
+float PrecioLibros[MAXLETRAS];
+
+char NombresClientes[MAXLIBROS][MAXLETRAS];
+int cedulasClientes[MAXLIBROS];
+int fechas[MAXLIBROS][2];
+float ValoresPagados[MAXLIBROS];
+int cantidadDeProductosComprados[MAXLIBROS];
+char NombreCompras[MAXLIBROS][MAXLETRAS];
+
+
 
 
 void IngresarNuevolibro(char NombresLibros[MAXLIBROS][MAXLETRAS], int CantidadLibros[MAXLIBROS], float PrecioLibros[MAXLETRAS], int* LibrosIngresados){
@@ -113,10 +125,111 @@ void aumentarStock(char NombresLibros[MAXLIBROS][MAXLETRAS], char buscar[MAXLETR
             printf("Agregado correctamente\n");
             printf("<-------------------------->\n");
             return;
-            
-            
         }
     }
     printf("Libro no encontrado.\n");
     printf("<---------------------------->\n");
+}
+
+void facturar(int* ClientesIngresados, int buscarcedula[], int CedulaCompras[], int* NumeroDeCompras, char NombreCompras[MAXLIBROS][MAXLETRAS], int buscar[], int LibrosIngresados){
+    buscarcedula = leerEntero("Ingresar la cedula del cliente: ");
+    //Validacion de cedula
+    for (int i = 0; i < ClientesIngresados; i++)
+    {
+        if ((strcmp(buscarcedula,cedulasClientes[i]))==0)
+        {
+            printf("Encontrado\n");
+            IngresarFecha(fechas[100][3], NumeroDeCompras);
+            CedulaCompras[*NumeroDeCompras] = cedulasClientes[i];
+            //NombreCompras[*NumeroDeCompras] = NombresClientes[i];
+            fac(buscar, NombresLibros, LibrosIngresados, NumeroDeCompras);
+            (*NumeroDeCompras)++;
+            return;
+        }
+
+    }
+    printf("Cliente no encontrado");
+    //funcion ingresar cliente
+    IngresarFecha(fechas[100][3], NumeroDeCompras);
+    CedulaCompras[*NumeroDeCompras] = buscarcedula;
+    //NombreCompras[*NumeroDeCompras] = NombresClientes[i];
+    fac(buscar, NombresLibros, LibrosIngresados, NumeroDeCompras);
+    (*NumeroDeCompras)++;
+}
+
+void fac(int buscar[], char NombresLibros[MAXLIBROS][MAXLETRAS], int LibrosIngresados, int NumeroDeCompras){
+    int respuesta = 1;
+    float valor = 0;
+    float valorTotal =0;
+    while(respuesta == 1){
+        printf("Ingrese el nombre del libro a vender: ");
+        for (int i = 0; i < LibrosIngresados; i++)
+        {
+            if ((strcmp(buscar,NombresLibros[i]))==0)
+            {
+                int cantidad=0;
+                printf("Encontrado\n");
+                printf("Ingrese la cantidad de libros a vender");
+                scanf("%i", cantidad);
+                valor = cantidad * PrecioLibros[i];
+                cantidadDeProductosComprados[NumeroDeCompras] += cantidad;
+                CantidadLibros[i] = CantidadLibros[i] - cantidad;
+            }else
+                printf("Libro no encontrado");
+            valorTotal = valor + valorTotal;
+        }
+        printf("Desea seguir comprando? 1=si/2=no");
+        scanf("%i", &respuesta);
+    }
+    printf("Cantidad a pagar: %f", valorTotal);
+    ValoresPagados[NumeroDeCompras]=valorTotal;
+}
+
+void buscarFarctura(int buscarcedula[], int NumeroDeCompras, int CedulaCompras[]){
+    printf("Ingrese el numero de cedula del cliente");
+    buscarcedula = leerEntero("Ingresar la cedula del cliente: ");
+    for (int i = 0; i < NumeroDeCompras; i++)
+    {
+        if ((strcmp(buscarcedula,CedulaCompras[i]))==0)
+        {
+            printf("Encontrado\n");
+            printf("fecha: ");
+            printf("cedula: ");
+            printf("%i", CedulaCompras[i]);
+            printf("Nombre: ");
+            printf("%s", NombreCompras[i]);
+            printf("Valor pagado: ");
+            printf("%f", ValoresPagados[i]);
+            printf("cantidad de productos: ");
+            printf("%i", cantidadDeProductosComprados[i]);
+        }
+
+    }
+}
+
+void ListadoFacturas(int NumeroDeCompras, int CedulaCompras[]){
+    for (int i = 0; i < NumeroDeCompras; i++)
+    {
+            printf("fecha: ");
+            printf("cedula: ");
+            printf("%i", CedulaCompras[i]);
+            printf("Nombre: ");
+            printf("%s", NombreCompras[i]);
+            printf("Valor pagado: ");
+            printf("%f", ValoresPagados[i]);
+            printf("cantidad de productos: ");
+            printf("%i", cantidadDeProductosComprados[i]);
+            printf("---------------------");
+    }
+    
+}
+
+void IngresarFecha(int fecha[100][3], int NumeroDeCompras){
+    printf("Ingrese el dia: ");
+    fecha[NumeroDeCompras][0]=leerEnteroEntre("Ingrese el dia: ", 1, 31);
+    scanf("%i", fecha[NumeroDeCompras][0]);
+    printf("Ingrese el mes: ");
+    scanf("%i", fecha[NumeroDeCompras][1]);
+    printf("Ingrese el año: ");
+    scanf("%i", fecha[NumeroDeCompras][2]);
 }
